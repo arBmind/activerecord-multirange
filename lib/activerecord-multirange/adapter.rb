@@ -27,9 +27,8 @@ module Activerecord
             JOIN pg_range as r ON oid = "rngmultitypid";
         QUERY
 
-        execute_and_clear(query, "SCHEMA", []) do |records|
-          initializer.register_multirange_type(records)
-        end
+        records = internal_execute(query, "SCHEMA", [])
+        initializer.register_multirange_type(records)
       end
     end
   end
